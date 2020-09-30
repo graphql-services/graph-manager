@@ -1,10 +1,5 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 @Entity()
@@ -16,41 +11,6 @@ export class ObjectBase {
   @CreateDateColumn()
   @Field(() => Date)
   createdAt: Date;
-}
-
-@ObjectType()
-@Entity()
-export class Gateway extends ObjectBase {
-  @Column()
-  @Field(() => String)
-  name: string;
-}
-
-export enum GatewayVersionStatus {
-  PENDING,
-  VALID,
-  INVALID,
-}
-registerEnumType(GatewayVersionStatus, {
-  name: 'GatewayVersionStatus',
-});
-
-@ObjectType()
-export class GatewayVersion {
-  @Field(() => GatewayVersionStatus)
-  status: GatewayVersionStatus;
-
-  @Field(() => String)
-  validationError: string;
-}
-
-@ObjectType()
-export class Service {
-  @Field(() => String)
-  url: string;
-
-  @Field(() => String)
-  urlSizeMedium: string;
 }
 
 // @ObjectType()

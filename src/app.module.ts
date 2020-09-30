@@ -1,6 +1,9 @@
-import { Gateway } from './graph-manager/graph-manager.entities';
-import { GraphManagerModule } from './graph-manager/graph-manager.module';
-import { GraphQLFederationModule } from '@nestjs/graphql';
+import {
+  GraphManagerModule,
+  ormEntities,
+} from './graph-manager/graph-manager.module';
+
+import { GraphQLModule } from '@nestjs/graphql';
 import { HealthcheckModule } from './healthcheck/healthcheck.module';
 import { Module } from '@nestjs/common';
 import { PromModule } from '@digikare/nestjs-prom';
@@ -9,8 +12,9 @@ import { join } from 'path';
 
 @Module({
   imports: [
-    GraphQLFederationModule.forRoot({
+    GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      installSubscriptionHandlers: true,
     }),
     GraphManagerModule,
     HealthcheckModule,
@@ -23,10 +27,10 @@ import { join } from 'path';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: './mydb.sql',
-      entities: [Gateway],
+      entities: ormEntities,
       synchronize: true,
-      logging: 'all',
-      logger: 'advanced-console',
+      // logging: 'all',
+      // logger: 'advanced-console',
     }),
   ],
   controllers: [],

@@ -10,7 +10,8 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noUnusedParameters": false
   },
   "exclude": ["node_modules", "dist"]
 }

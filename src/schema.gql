@@ -2,20 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-directive @key(fields: String!) on OBJECT | INTERFACE
-
-directive @extends on OBJECT | INTERFACE
-
-directive @external on OBJECT | FIELD_DEFINITION
-
-directive @requires(fields: String!) on FIELD_DEFINITION
-
-directive @provides(fields: String!) on FIELD_DEFINITION
-
-type Gateway {
+type Service {
   id: ID!
   createdAt: DateTime!
   name: String!
+  url: String!
+  schemas: [ServiceSchema!]!
+  latestSchema: ServiceSchema
 }
 
 """
@@ -23,15 +16,71 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type ServiceSchema {
+  id: ID!
+  createdAt: DateTime!
+  version: String!
+  typeDefs: String!
+  service: Service!
+  gatewayVersions: [GatewayVersion!]!
+}
+
+type Gateway {
+  id: ID!
+  createdAt: DateTime!
+  name: String!
+  services: [Service!]!
+  versions: [GatewayVersion!]!
+  currentVersion: GatewayVersion
+}
+
+type GatewayVersion {
+  id: ID!
+  createdAt: DateTime!
+  status: GatewayVersionStatus!
+  validationError: String
+  gateway: Gateway!
+  serviceSchemas: [ServiceSchema!]!
+}
+
+enum GatewayVersionStatus {
+  PENDING
+  VALID
+  INVALID
+}
+
 type Query {
   gateway(id: ID!): Gateway
+  service(id: ID!): Service
 }
 
 type Mutation {
   createGateway(input: GatewayInput!): Gateway!
+  deleteGateway(id: ID!): Boolean!
+  createService(input: ServiceInput!): Service!
+  deleteService(id: ID!): Boolean!
+  addServiceToGateway(gatewayId: ID!, serviceId: ID!): Boolean!
+  removeServiceFromGateway(gatewayId: ID!, serviceId: ID!): Boolean!
+  publishServiceSchema(input: ServiceSchemaInput!): ServiceSchema!
 }
 
 input GatewayInput {
   id: ID
   name: String!
+}
+
+input ServiceInput {
+  id: ID
+  name: String!
+  url: String!
+}
+
+input ServiceSchemaInput {
+  serviceId: ID!
+  version: String!
+  typeDefs: String!
+}
+
+type Subscription {
+  gatewayVersionUpdated(gatewayId: ID!): GatewayVersion!
 }
