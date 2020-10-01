@@ -1,0 +1,13 @@
+language: node_js
+sudo: false
+services:
+  - docker
+node_js:
+  - 8.9.0
+before_script:
+  - npm install -g codecov
+jobs:
+  include:
+    - stage: deploy
+      script: make build push
+      if: tag IS present OR branch = master
