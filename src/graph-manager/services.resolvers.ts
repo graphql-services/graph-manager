@@ -3,8 +3,9 @@ import { Args, Query, Resolver, Mutation, ID } from '@nestjs/graphql';
 import { PromMethodCounter } from '@digikare/nestjs-prom';
 import { ServiceInput, ServiceSchemaInput } from './services.inputs';
 import { ServicesService } from './services.service';
-import { Service, ServiceSchema } from './services.entities';
+import { Service } from './services.entities';
 import { ServicesSchemaService } from './services-schema.service';
+import { ServiceSchema } from './services-schema.entities';
 
 @Resolver(() => Service)
 export class ServicesResolver {

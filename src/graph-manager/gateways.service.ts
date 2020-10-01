@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import {
-  Gateway,
   GatewayVersion,
   GatewayVersionStatus,
-} from './gateways.entities';
+} from './gateways-version.entities';
+import { Gateway } from './gateways.entities';
 import { GatewayInput } from './gateways.inputs';
 import { pubSub } from './gateways.resolvers';
 import { SchemaValidationService } from './schema-validation.service';
-import { ServiceSchema } from './services.entities';
+import { ServiceSchema } from './services-schema.entities';
 
 @Injectable()
 export class GatewaysService {

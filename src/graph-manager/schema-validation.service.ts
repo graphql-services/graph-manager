@@ -1,7 +1,7 @@
 import { ApolloGateway } from '@apollo/gateway';
 import { GatewayVersion } from './gateways-version.entities';
 import { Injectable } from '@nestjs/common';
-import { ServiceSchema } from './services.entities';
+import { ServiceSchema } from './services-schema.entities';
 import { parse } from 'graphql';
 
 @Injectable()

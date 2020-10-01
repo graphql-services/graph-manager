@@ -3,7 +3,7 @@ sudo: false
 services:
   - docker
 node_js:
-  - 8.9.0
+  - lts/*
 before_script:
   - npm install -g codecov
 jobs:

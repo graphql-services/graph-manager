@@ -25,15 +25,6 @@ type ServiceSchema {
   gatewayVersions: [GatewayVersion!]!
 }
 
-type Gateway {
-  id: ID!
-  createdAt: DateTime!
-  name: String!
-  services: [Service!]!
-  versions: [GatewayVersion!]!
-  currentVersion: GatewayVersion
-}
-
 type GatewayVersion {
   id: ID!
   createdAt: DateTime!
@@ -47,6 +38,15 @@ enum GatewayVersionStatus {
   PENDING
   VALID
   INVALID
+}
+
+type Gateway {
+  id: ID!
+  createdAt: DateTime!
+  name: String!
+  services: [Service!]!
+  versions: [GatewayVersion!]!
+  currentVersion: GatewayVersion
 }
 
 type Query {

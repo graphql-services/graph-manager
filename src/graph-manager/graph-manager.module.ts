@@ -1,10 +1,11 @@
-import { Gateway, GatewayVersion } from './gateways.entities';
-import { Service, ServiceSchema } from './services.entities';
-
+import { Gateway } from './gateways.entities';
+import { GatewayVersion } from './gateways-version.entities';
 import { GatewaysResolver } from './gateways.resolvers';
 import { GatewaysService } from './gateways.service';
 import { Module } from '@nestjs/common';
 import { SchemaValidationService } from './schema-validation.service';
+import { Service } from './services.entities';
+import { ServiceSchema } from './services-schema.entities';
 import { ServicesResolver } from './services.resolvers';
 import { ServicesSchemaService } from './services-schema.service';
 import { ServicesService } from './services.service';

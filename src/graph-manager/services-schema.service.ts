@@ -3,7 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { GraphQLError, parse } from 'graphql';
 import { Repository } from 'typeorm';
 import { GatewaysService } from './gateways.service';
-import { Service, ServiceSchema } from './services.entities';
+import { ServiceSchema } from './services-schema.entities';
+import { Service } from './services.entities';
 import { ServiceSchemaInput } from './services.inputs';
 
 @Injectable()

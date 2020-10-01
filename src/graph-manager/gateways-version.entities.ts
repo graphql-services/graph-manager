@@ -3,7 +3,7 @@ import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 
 import { Gateway } from './gateways.entities';
 import { ObjectBase } from './graph-manager.entities';
-import { ServiceSchema } from './services.entities';
+import { ServiceSchema } from './services-schema.entities';
 
 export enum GatewayVersionStatus {
   PENDING = 'PENDING',
