@@ -34,7 +34,7 @@ export class ServicesSchemaService {
       typeDefs: input.typeDefs,
     });
     schema.service = Promise.resolve(service);
-    await this.serviceSchemaRepository.insert(schema);
+    await this.serviceSchemaRepository.save(schema);
 
     service.latestSchema = Promise.resolve(schema);
     await this.serviceRepository.save(service);

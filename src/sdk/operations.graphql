@@ -1,0 +1,50 @@
+query getGateway($id: ID!) {
+  gateway(id: $id) {
+    id
+    name
+    currentVersion {
+      id
+      status
+      validationError
+      serviceSchemas {
+        id
+        version
+        typeDefs
+        service {
+          name
+          url
+        }
+      }
+    }
+    createdAt
+  }
+}
+
+mutation publishServiceSchema($input: ServiceSchemaInput!) {
+  publishServiceSchema(input: $input) {
+    id
+    version
+    typeDefs
+  }
+}
+
+subscription onGatewayVersionUpdated($gatewayId: ID!) {
+  gatewayVersionUpdated(gatewayId: $gatewayId) {
+    id
+    status
+    gateway {
+      id
+      name
+      currentVersion {
+        serviceSchemas {
+          version
+          typeDefs
+          service {
+            name
+            url
+          }
+        }
+      }
+    }
+  }
+}

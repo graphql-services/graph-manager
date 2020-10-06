@@ -22,3 +22,5 @@ start:
 
 test-performance:
 	cat test/performance/attack.txt | vegeta attack -duration 1s | vegeta report -type=hdrplot
+generate-sdk:
+	npm run generate-sdk
